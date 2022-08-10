@@ -1,0 +1,51 @@
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+clean() {
+    # echo -e "\n${GREEN}rm -rf cache${NC}\n"
+    rm -rf cache
+
+    # echo -e "\n${GREEN}rm -rf deployments${NC}\n"
+    rm -rf deployments
+
+    # echo -e "\n${GREEN}npx hardhat clean${NC}\n"
+    hh clean
+}
+
+compile() {
+    # echo -e "\n${GREEN}rm -rf cache${NC}\n"
+    rm -rf cache
+
+    # echo -e "\n${GREEN}npx hardhat clean${NC}\n"
+    hh clean
+
+    # echo -e "\n${GREEN}npx hardhat compile${NC}\n"
+    hh compile
+}
+
+deploy() {
+    hh node
+    # echo -e "\n${GREEN}rm -rf deployments${NC}\n"
+    # rm -rf deployments
+
+    # echo -e "\n${GREEN}npx hardhat node --show-stack-traces${NC}\n"
+    # exec 3>&1
+    # stderr="$(npx hardhat node --show-stack-traces </dev/stdin 2>&1 1>&3)"
+    # exitcode="${?}"
+    # echo "STDERR: $stderr"
+    # echo -e "\n\n${RED}Something went wrong. Restarting whole process.${NC}\n\n"
+    # deploy
+}
+
+all() {
+    clean
+    compile
+    deploy
+}
+
+fn_exists() { 
+    declare -F "$1" > /dev/null; 
+}
+
+fn_exists $1 && $1 || echo -e "${RED}There is no method with name of $1.${NC}"

@@ -78,7 +78,7 @@ contract WorldOneTreasury is Ownable {
         address _MIM,
         uint32 _secondsNeededForQueue,
         uint256 _limitAmount
-    ) {
+    ) public {
         require( _WorldOne != address(0) );
         WorldOne = IWorldOneERC20(_WorldOne);
 

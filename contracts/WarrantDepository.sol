@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
-pragma solidity 0.7.5;
+pragma solidity  0.7.5;
 pragma abicoder v2;
 
 import "./libs/LowGasSafeMath.sol";
@@ -77,7 +77,7 @@ contract WorldOneWarrantDepository is Ownable {
         address _treasury, 
         address _DAO,
         address _factory
-    ) {
+    ) public {
         require( _WorldOne != address(0) );
         WorldOne = IERC20(_WorldOne);
         require( _principle != address(0) );
